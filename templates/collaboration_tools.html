@@ -1,0 +1,47 @@
+<!-- collaboration_tools.html -->
+{% extends 'home.html' %}
+
+{% block content %}
+  <div class="content">
+    <div class="chat-window">
+      <h3>Chat</h3>
+      <div class="message-container">
+        <div class="message">
+          <span class="user">John:</span>
+          <span class="text">Hello everyone!</span>
+        </div>
+        <div class="message">
+          <span class="user">Alice:</span>
+          <span class="text">Hi John! How are you?</span>
+        </div>
+        <div class="message">
+          <span class="user">John:</span>
+          <span class="text">I'm doing great, thanks!</span>
+        </div>
+        <!-- Add more messages here -->
+      </div>
+    </div>
+    <div class="calendar">
+      <h3>Calendar</h3>
+      <div class="current-date">
+        <p>{{ current_date }}</p>
+      </div>
+      <div class="calendar-grid">
+        <div class="weekdays">
+          <div class="day">Sun</div>
+          <div class="day">Mon</div>
+          <div class="day">Tue</div>
+          <div class="day">Wed</div>
+          <div class="day">Thu</div>
+          <div class="day">Fri</div>
+          <div class="day">Sat</div>
+        </div>
+        <div class="days">
+          <!-- Calendar days will be dynamically generated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" type="text/css" href="/static/collaboration_tools.css">
+{% endblock %}

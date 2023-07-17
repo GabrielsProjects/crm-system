@@ -1,0 +1,21 @@
+<!-- sales_dashboard.html -->
+{% extends 'home.html' %}
+
+{% block content %}
+  <div class="content">
+    <h2>Sales Dashboard</h2>
+    <table>
+      <tr>
+        <th>Month</th>
+        <th>Average Sales</th>
+        <th>Average Money Spent</th>
+      </tr>
+      {% for row in average_sales_per_month %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

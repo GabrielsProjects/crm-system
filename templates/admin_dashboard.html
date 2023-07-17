@@ -1,0 +1,35 @@
+<!-- user_preferences.html -->
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>User Preferences</h2>
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user[0] }}</td>
+      <td>{{ user[1] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Add New User</h3>
+  <form method="post" action="/add-user">
+    <label for="new-username">Username:</label>
+    <input type="text" id="new-username" name="new_username" required>
+    <label for="new-password">Password:</label>
+    <input type="password" id="new-password" name="new_password" required>
+    <button type="submit">Add User</button>
+  </form>
+
+  <h3>Delete User</h3>
+  <form method="post" action="/delete-user">
+    <label for="delete-username">Username:</label>
+    <input type="text" id="delete-username" name="delete_username" required>
+    <button type="submit">Delete User</button>
+  </form>
+{% endblock %}

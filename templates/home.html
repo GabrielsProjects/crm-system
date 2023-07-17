@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div class="profile">
+        <i class="fas fa-user"></i>
+        <div class="welcome-message">
+          <h3>Welcome, {{ username }}</h3>
+        </div>
+      </div>
+      <div class="notifications">
+        <i class="fas fa-bell"></i>
+        <ul class="notification-list">
+          <li>Notification 1</li>
+          <li>Notification 2</li>
+          <li>Notification 3</li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-wrapper">
+      <div class="sidebar">
+        <ul>
+          <li><i class="fas fa-home"></i><a href="home">Home</a></li>
+          <li><i class="fas fa-chart-bar"></i><a href="reports">Reports</a></li>
+          <li><i class="fas fa-users"></i><a href="collaboration-tools">Collaboration Tools</a></li>
+          <li><i class="fas fa-chart-line"></i><a href="sales-dashboard">Sales Dashboard</a></li>
+          <li><i class="fas fa-bullhorn"></i><a href="campaign-management">Campaign Management</a></li>
+          <li><i class="fas fa-cogs"></i><a href="admin-dashboard">Admin Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        {% block content %}
+        <div class="content">
+            <h2>Current Customers</h2>
+            <table>
+            <thead>
+                <tr>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer[2] }}</td>
+                    <td>{{ customer[3] }}</td>
+                    <td>{{ customer[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

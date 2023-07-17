@@ -1,0 +1,16 @@
+<!-- campaign_management.html -->
+{% extends 'home.html' %}
+
+{% block content %}
+  <div class="content">
+    <h2>Campaign Management</h2>
+    <div class="last-names">
+      <h3>Current Campaigns:</h3>
+      <ul>
+        {% for last_name in last_names %}
+        <li>{{ last_name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
