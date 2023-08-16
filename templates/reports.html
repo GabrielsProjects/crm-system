@@ -3,61 +3,27 @@
 
 {% block content %}
   <div class="content">
-    <h2>Reports</h2>
-    <div class="filter">
-      <label for="filter-customer">Filter by Customer ID:</label>
-      <select id="filter-customer">
-        <option value="">All</option>
-        {% for row in rows %}
-        <option value="{{ row[0] }}">{{ row[0] }}</option>
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Date (yy/mm/dd)</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in report_data %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+          </tr>
         {% endfor %}
-      </select>
-      <button id="apply-filter">Apply Filter</button>
-    </div>
-    <table id="report-table">
-      <tr>
-        <th>Last Name</th>
-        <th>Sale Date</th>
-        <th>Total Sales</th>
-        <th>Contract Price</th>
-      </tr>
-      {% for row in rows %}
-      <tr>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
-        <td>{{ row[5] }}</td>
-      </tr>
-      {% endfor %}
+      </tbody>
     </table>
   </div>
-
-  <script>
-    const filterCustomerSelect = document.getElementById('filter-customer');
-    const applyFilterBtn = document.getElementById('apply-filter');
-    const reportTable = document.getElementById('report-table');
-
-    applyFilterBtn.addEventListener('click', () => {
-      const selectedCustomer = filterCustomerSelect.value;
-
-      Array.from(reportTable.rows).forEach((row, index) => {
-        if (index === 0) {
-          // Skip the header row
-          return;
-        }
-
-        const customerID = row.cells[0].textContent;
-        const lastNameCell = document.getElementById(`last-name-${customerID}`);
-
-        if (selectedCustomer === '' || customerID === selectedCustomer) {
-          row.style.display = '';
-          if (lastNameCell.textContent === 'Loading...') {
-            fetchLastName(customerID, lastNameCell);
-          }
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    });
-  </script>
 {% endblock %}

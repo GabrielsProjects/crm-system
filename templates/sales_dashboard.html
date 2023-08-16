@@ -1,21 +1,34 @@
-<!-- sales_dashboard.html -->
+<!-- reports.html -->
 {% extends 'home.html' %}
 
 {% block content %}
-  <div class="content">
-    <h2>Sales Dashboard</h2>
+  <form action="{{ url_for('sales_dashboard') }}" method="get">
+        <label for="group_option">Select Group Option:</label>
+        <select name="group_option" id="group_option">
+            <option value="c.Company" {% if group_option == 'c.Company' %}selected{% endif %}>By Company</option>
+            <option value="p.Category" {% if group_option == 'p.Category' %}selected{% endif %}>By Category</option>
+            <!-- Add more options based on your needs -->
+        </select>
+        <button type="submit">Apply</button>
+    </form>
+
     <table>
-      <tr>
-        <th>Month</th>
-        <th>Average Sales</th>
-        <th>Average Money Spent</th>
-      </tr>
-      {% for row in average_sales_per_month %}
-      <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-      </tr>
-      {% endfor %}
+        <tr>
+            <th>Company</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Sale Date</th>
+            <th>Total Sale</th>
+        </tr>
+        {% for row in report_data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>
+        {% endfor %}
     </table>
-  </div>
+
 {% endblock %}

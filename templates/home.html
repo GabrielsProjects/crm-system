@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../static/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <style>
@@ -10,11 +11,13 @@
 <body>
   <div class="container">
     <div class="top-bar">
-      <div class="profile">
-        <i class="fas fa-user"></i>
-        <div class="welcome-message">
-          <h3>Welcome, {{ username }}</h3>
-        </div>
+        <div class="user-container">
+          <div class="user-image">
+            <img src="{{ user_image }}" alt="User Image">
+          </div>
+          <div class="welcome-text">
+            Welcome, {{ username }}
+          </div>
       </div>
       <div class="notifications">
         <i class="fas fa-bell"></i>
@@ -27,41 +30,89 @@
     </div>
     <div class="content-wrapper">
       <div class="sidebar">
-        <ul>
-          <li><i class="fas fa-home"></i><a href="home">Home</a></li>
-          <li><i class="fas fa-chart-bar"></i><a href="reports">Reports</a></li>
-          <li><i class="fas fa-users"></i><a href="collaboration-tools">Collaboration Tools</a></li>
-          <li><i class="fas fa-chart-line"></i><a href="sales-dashboard">Sales Dashboard</a></li>
-          <li><i class="fas fa-bullhorn"></i><a href="campaign-management">Campaign Management</a></li>
-          <li><i class="fas fa-cogs"></i><a href="admin-dashboard">Admin Dashboard</a></li>
+        <ul class="list_top">
+          <li><a href="home"><i class="fas fa-home"></i>Home</a></li>
+          <li><a href="reports"><i class="fas fa-chart-bar"></i>Reports</a></li>
+          <li><a href="collaboration-tools"><i class="fas fa-users"></i>Collaboration Tools</a></li>
+          <li><a href="sales-dashboard"><i class="fas fa-chart-line"></i>Sales Dashboard</a></li>
+          <li><a href="campaign-management"><i class="fas fa-bullhorn"></i>Campaign Management</a></li>
         </ul>
+        <ul class="list_bottom">
+          <li><a href="admin-dashboard"><i class="fas fa-cogs"></i>Admin Dashboard</a></li>
+        </ul>
+          <a style="color:red; font-size:12px;" href="logout">Logout</a>
       </div>
       <div class="content">
         {% block content %}
+        <!-- Add this section above the table -->
+<div class="search-container">
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="Search by ID or Name">
+    <button type="button" id="search-button"><i class="fas fa-search"></i></button>
+  </form>
+</div>
+
         <div class="content">
-            <h2>Current Customers</h2>
-            <table>
+          <table>
             <thead>
-                <tr>
-                <th>Last Name</th>
+              <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
                 <th>Email</th>
-                <th>Phone</th>
-                </tr>
+                <th>Company</th>
+              </tr>
             </thead>
             <tbody>
-                {% for customer in customers %}
-                <tr>
-                    <td>{{ customer[2] }}</td>
-                    <td>{{ customer[3] }}</td>
-                    <td>{{ customer[4] }}</td>
+              {% for customer in customers %}
+                <tr class="customer-row" data-customer-id="{{ customer[0] }}" data-customer-name="{{ customer[1] }}">
+                  <td>{{ customer[0] }}</td>
+                  <td>{{ customer[1] ~ ' ' ~ customer[2] }}</td>
+                  <td>{{ customer[3] }}</td>
+                  <td>{{ customer[4] }}</td>
                 </tr>
-                {% endfor %}
+              {% endfor %}
             </tbody>
-            </table>
+          </table>
         </div>
         {% endblock %}
       </div>
     </div>
   </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("JavaScript code is executed."); // Print a message to the console
+
+        const currentPage = window.location.pathname.split("/").pop(); // Get the current page name
+        const sidebar = document.querySelector(".sidebar"); // Select the sidebar element
+        const listItems = sidebar.querySelectorAll("li a"); // Select list items within the sidebar
+
+        // Loop through list items to find the active page and apply background color
+        listItems.forEach(function(item) {
+            if (item.getAttribute("href") === currentPage) {
+                item.parentElement.style.backgroundColor = "#9391ff"; // Set the active page background color
+                item.parentElement.style.borderRadius = "5px"; // Add border-radius
+            }
+        });
+      const searchForm = document.getElementById("search-form");
+  const searchInput = document.getElementById("search-input");
+  const searchButton = document.getElementById("search-button");
+  const customerRows = document.querySelectorAll(".customer-row");
+
+  searchButton.addEventListener("click", function() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    
+    customerRows.forEach(function(row) {
+      const customerId = row.getAttribute("data-customer-id").toLowerCase();
+      const customerName = row.getAttribute("data-customer-name").toLowerCase();
+
+      if (customerId.includes(searchTerm) || customerName.includes(searchTerm)) {
+        row.style.display = "table-row";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  });
+    });
+</script>
 </body>
 </html>

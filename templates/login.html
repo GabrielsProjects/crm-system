@@ -2,10 +2,11 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../static/login.css">
-    <title>Login</title>
+    <title>CRM System Login</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <div class="container">
+        <h1>CRM System Login</h1>
     {% if error_message %}
         <p style="color: red;">{{ error_message }}</p>
     {% endif %}
@@ -16,5 +17,6 @@
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Login">
     </form>
+    </div>
 </body>
 </html>

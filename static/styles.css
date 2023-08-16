@@ -5,54 +5,82 @@
 }
 
 .top-bar {
-  background-color: #635dff;
+  background-color: #9391ff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.profile {
+.user-container {
   display: flex;
   align-items: center;
 }
 
-.profile-picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.user-image {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-right: 20px;
 }
 
+.user-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.welcome-text {
+	font-size: 20px;
+  font-family: 'Open Sans', sans-serif; /* Open Sans font */
+  font-weight: 900;
+  color: white;
+}
+
+/* Style for the notifications container */
 .notifications {
-  display: flex;
-  align-items: center;
   position: relative;
+  display: inline-block;
+  margin-right: 20px; /* Adjust the margin as needed */
 }
 
-.notifications i {
-  margin-right: 10px;
-  color: white;
+/* Style for the bell icon */
+.fas.fa-bell {
+  font-size: 24px;
+  color: #fff; /* Adjust the color as needed */
+  cursor: pointer;
 }
 
+/* Style for the notification list */
 .notification-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background-color: #24243a;
-  padding: 10px;
   display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff; /* Adjust the background color as needed */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adjust the shadow as needed */
+  list-style: none;
+  padding: 10px;
+  min-width: 200px; /* Adjust the width as needed */
+  z-index: 1;
 }
 
-.notifications:hover .notification-list {
-  display: block;
-}
-
+/* Style for individual notifications */
 .notification-list li {
-  color: white;
+  padding: 8px 10px;
+  border-bottom: 1px solid #ccc; /* Adjust the border color as needed */
+}
+
+/* Style for the last notification item to remove border */
+.notification-list li:last-child {
+  border-bottom: none;
+}
+
+/* Show the notification list when the bell icon is hovered or focused */
+.notifications:hover .notification-list,
+.notifications:focus-within .notification-list {
+  display: block;
 }
 
 .content-wrapper {
@@ -61,22 +89,60 @@
 }
 
 .sidebar {
-  background-color: #24243a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #635dff;
   width: 20vh;
   padding: 10px;
 }
 
+/* Remove default list styles */
 .sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
+.list_top, .list_bottom {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list_bottom {
+    margin-top: auto;
+}
+
+/* Style the list items */
 .sidebar li {
-  margin-bottom: 10px;
-  font-weight: 700px;
-  padding: 5px;
-  font-family: 'Open Sans', sans-serif;
+	margin-bottom: 15px; /* Add spacing between list items */
+}
+
+/* Style the button links */
+.sidebar li a {
+	display: flex;
+	align-items: center;
+  font-family: 'Open Sans', sans-serif; /* Open Sans font */
+  font-weight: 700;
+	padding: 10px; /* Add padding */
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	width: auto; /* Allow link to expand based on content */
+	transition: background-color 0.3s; /* Add smooth transition */
+	border: none; /* Remove border */
+	border-radius: 5px; /* Add border radius */
+}
+
+/* Style the icons */
+.sidebar li a i {
+	margin-right: 15px;
+}
+
+/* Hover effect */
+.sidebar li a:hover {
+	background-color: #4541b2; /* Change background color on hover */
 }
 
 .content {
@@ -86,28 +152,130 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
+  background-color:#fff;
+  margin: 0;
+  padding: 0;
 }
 
+/* Style for the search form */
+.search-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#search-input {
+  padding: 6px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-button {
+  padding: 6px 10px;
+  background-color: #9391ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style for the customer table */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-thead {
-  background-color: #635dff;
-  color: white;
-}
-
-th,
-td {
+th, td {
+  border: 1px solid #ddd;
   padding: 8px;
-  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
-tbody tr:nth-child(even) {
+th {
   background-color: #f2f2f2;
 }
 
-tbody tr:hover {
-  background-color: #ddd;
+tr.customer-row:hover {
+  background-color: #f5f5f5;
+}
+
+
+/* Style for the dashboard container */
+.dashboard-container {
+    display: flex;
+}
+
+/* Style for the table container */
+.table-container {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Style for the form container */
+.form-container {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+/* Style for the dashboard container */
+.dashboard-container {
+    display: flex;
+}
+
+/* Style for the table container */
+.table-container {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Style for the form container */
+.form-container {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+/* Style for the form */
+.form-container h2 {
+    margin-bottom: 10px;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-container input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container button {
+    padding: 10px;
+    background-color: #9391ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #4541b2;
+}
+
+.error-message {
+  color: red;
 }

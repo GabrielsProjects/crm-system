@@ -1,47 +1,40 @@
-<!-- collaboration_tools.html -->
 {% extends 'home.html' %}
 
 {% block content %}
-  <div class="content">
-    <div class="chat-window">
-      <h3>Chat</h3>
-      <div class="message-container">
-        <div class="message">
-          <span class="user">John:</span>
-          <span class="text">Hello everyone!</span>
-        </div>
-        <div class="message">
-          <span class="user">Alice:</span>
-          <span class="text">Hi John! How are you?</span>
-        </div>
-        <div class="message">
-          <span class="user">John:</span>
-          <span class="text">I'm doing great, thanks!</span>
-        </div>
-        <!-- Add more messages here -->
-      </div>
+<div>
+    <h2>Collaboration Tools</h2>
+    
+    <form id="note-form">
+        <label for="note">Add Note:</label>
+        <input type="text" id="note" name="note" placeholder="Type your note here...">
+        <button type="button" id="submit-note">Submit</button>
+    </form>
+    
+    <div id="notes-section">
+        <h3>Notes:</h3>
+        <ul id="notes-list">
+            <!-- Existing notes will be appended here -->
+        </ul>
     </div>
-    <div class="calendar">
-      <h3>Calendar</h3>
-      <div class="current-date">
-        <p>{{ current_date }}</p>
-      </div>
-      <div class="calendar-grid">
-        <div class="weekdays">
-          <div class="day">Sun</div>
-          <div class="day">Mon</div>
-          <div class="day">Tue</div>
-          <div class="day">Wed</div>
-          <div class="day">Thu</div>
-          <div class="day">Fri</div>
-          <div class="day">Sat</div>
-        </div>
-        <div class="days">
-          <!-- Calendar days will be dynamically generated here -->
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <link rel="stylesheet" type="text/css" href="/static/collaboration_tools.css">
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const noteForm = document.getElementById("note-form");
+        const notesList = document.getElementById("notes-list");
+        const submitButton = document.getElementById("submit-note");
+
+        submitButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            const noteInput = document.getElementById("note");
+            const newNote = noteInput.value.trim();
+            if (newNote !== "") {
+                const listItem = document.createElement("li");
+                listItem.textContent = newNote;
+                notesList.appendChild(listItem);
+                noteInput.value = "";
+            }
+        });
+    });
+</script>
 {% endblock %}

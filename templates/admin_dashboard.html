@@ -1,35 +1,49 @@
-<!-- user_preferences.html -->
 {% extends 'home.html' %}
 
 {% block content %}
-  <h2>User Preferences</h2>
-  <table>
-    <tr>
-      <th>Username</th>
-      <th>Password</th>
-      <th>Action</th>
-    </tr>
-    {% for user in users %}
-    <tr>
-      <td>{{ user[0] }}</td>
-      <td>{{ user[1] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="dashboard-container">
+    <div class="table-container">
+        <table>
+            <p>Current Existing Users</p>
+            <tr>
+                <th>Username</th>
+                <th></th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>
+                    {% if user[0] != 'admin' %}
+                        <form action="/delete_user/{{ user[0] }}" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="form-container">
+        <p>Add User</p>
+        <form action="/add_user" method="POST" enctype="multipart/form-data">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-  <h3>Add New User</h3>
-  <form method="post" action="/add-user">
-    <label for="new-username">Username:</label>
-    <input type="text" id="new-username" name="new_username" required>
-    <label for="new-password">Password:</label>
-    <input type="password" id="new-password" name="new_password" required>
-    <button type="submit">Add User</button>
-  </form>
-
-  <h3>Delete User</h3>
-  <form method="post" action="/delete-user">
-    <label for="delete-username">Username:</label>
-    <input type="text" id="delete-username" name="delete_username" required>
-    <button type="submit">Delete User</button>
-  </form>
+			<label for="profile_picture">Profile Picture:</label>
+			<input type="file" id="profile_picture" name="profile_picture" accept=".jpg, .jpeg, .png">
+            
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</div>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="error-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 {% endblock %}
